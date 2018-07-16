@@ -40,7 +40,7 @@ heroku create
 ```
 
 ```
-heroku push
+git push heroku master
 ```
 
 Update your redirect url in the developer portal to include your new domain.
