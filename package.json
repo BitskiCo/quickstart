@@ -6,7 +6,7 @@
     "build": "truffle migrate; webpack --env.network mainnet",
     "test": "truffle test",
     "dev": "webpack-dev-server --mode development --port 3000 --env.network development",
-    "postinstall": "./node_modules/webpack/bin/webpack.js --env.network mainnet",
+    "postinstall": "./node_modules/webpack/bin/webpack.js --progress --env.network mainnet",
     "start": "node server.js"
   },
   "keywords": [],
