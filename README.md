@@ -132,9 +132,11 @@ This template is designed to be easy to deploy on Heroku for live demos. The ser
 
 First, since this will be a publicly accessible app you'll want to deploy your contract on public blockchain as well. Decide if you're going to use a test network (kovan or rinkeby) where ETH can be acquired for free, or live network where you'll have to pay with real ETH.
 
-In order to deploy using Bitski, you'll need to have set up an app wallet, and included your app wallet id and secret in bitski.config.js. If you haven't already set one up, visit the [Developer Portal](https://developer.bitski.com) and set one up now.
+In order to deploy using Bitski, you'll need to have set up an app wallet. If you haven't already set one up, visit the [Developer Portal](https://developer.bitski.com) and create one now.
 
-Then, run the migrate command with the desired network value (live, kovan, or rinkeby):
+Then, paste your app wallet id and secret in `bitski.config.js` under `appWallet`.
+
+Finally, run the migrate command with the desired network value (live, kovan, or rinkeby):
 
 ```
 truffle migrate --network live
@@ -142,19 +144,21 @@ truffle migrate --network live
 
 #### Step 2: Deploy your front-end app on Heroku
 
-Create your heroku app using heroku-cli:
+Make sure you have a Heroku account, and have installed heroku-cli. Then, create your heroku app using heroku-cli:
 
 ```
-heroku create
+heroku apps:create my-app-name
 ```
 
-Important! Now that you have a dedicated URL for your app, update your redirect url in the [developer portal](https://developer.bitski.com) to include your callback route on the new domain (https://my-app.herokuapp.com/callback.html).
+Heroku will create a new project with the name you specified and will output your new URL in the console.
+
+Now that you have a dedicated URL for your app, update your redirect url in the [developer portal](https://developer.bitski.com) to include your callback route on the new domain (https://my-app.herokuapp.com/callback.html).
 
 ![Redirect URL](docs/live-redirect-url.png)
 
 Then, make sure your `bitski.config.js` production environment is configured correctly:
 
-- Add your new domain to `environments.production.redirectURL`
+- Add your new url to `environments.production.redirectURL` (making sure to include /callback.html)
 - Make sure `environments.production.network` matches where your contract was deployed
 
 Commit your changes:
@@ -176,4 +180,10 @@ Finally, check out your live site!
 heroku open
 ```
 
+#### Updating your app
+
 Whenever you want to update the front-end application, simply commit your changes and push to heroku again.
+
+```
+git push heroku master
+```
