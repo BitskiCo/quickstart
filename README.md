@@ -24,21 +24,25 @@ bitski.config.js | bitski configuration. update with your app's client id, and a
 
 ## Setup
 
-First clone the repo, or unpack the truffle box (coming soon).
+The easiest way to get started is to use our truffle box:
 
-Install the dependencies:
+```
+mkdir ProjectName
+cd ProjectName
+truffle unbox BitskiCo/bitski-quickstart
+```
+
+Alternatively, you can just clone this repo and run:
 
 ```
 npm install
 ```
 
-## Creating your Client ID & App Wallet
+## Creating your Client ID
 
 You'll need a Bitski client id to run this app. Your client id provides some basic information to users about your application, and links various permissions granted by the user to your app.
 
-Visit Bitski's [Developer Portal](https://developer.bitski.com), create an account if you haven't already, and create a client id.
-
-https://developer.bitski.com
+Visit Bitski's [Developer Portal](https://developer.bitski.com), create an account if you haven't already, and create a new app. You can find your client ID under the "OAuth" section on your app details page.
 
 ![Create App](docs/create-app.png)
 
@@ -46,23 +50,46 @@ Then you'll also want to add a redirect URL for localhost, where we'll be runnin
 
 ![Redirect URL](docs/redirect-url.png)
 
-Note: Your client id may need to be approved before you can use it, since Bitski is currently in beta.
+Note: Your app may need to be approved before you can use it, since Bitski is currently in beta.
 
 ## Developing locally
 
-This example uses webpack to combine some simple static files and plain javascript. Locally we'll use webpack-dev-server to run the app.
+This example uses webpack to combine some simple static files and plain javascript. Locally we'll use webpack-dev-server to serve the app.
 
-First, start Truffle's development blockchain:
+#### Step 1: Edit your config
+
+First, open `bitski.config.js` and paste your client id (from the developer portal):
+
+```javascript
+// bitski.config.js
+…
+app: {
+  id: 'YOUR APP ID HERE'
+}
+…
+```
+
+#### Step 2: Start the development blockchain
+
+Then, start Truffle's development blockchain:
 
 ```
 truffle develop
 ```
 
-If it's your first run, you'll also need to run the migrations:
+If it's your first run, you'll also need to run the migrations.
 
+From the truffle console you can just type `migrate`:
 ```
 truffle> migrate
 ```
+
+Or outside the console, just run:
+```
+truffle migrate
+```
+
+#### Step 3: Start the web server
 
 Then, in a new terminal window, run the development web server:
 
@@ -72,26 +99,30 @@ npm run dev
 
 Visit http://localhost:3000 to run the app. If everything is set up correctly, you should be able to log in to the dapp and see your wallet address. While in development mode, changes you make to the app will automatically trigger a reload of the page.
 
+---
+
 ## Customizing the Dapp
 
 Getting the example code working is just the beginning. Now it's up to your imagination to bring this dapp to life.
 
 Start by designing your contract using Solidity. You'll put any contracts you write or reference in the /contracts folder. We've created a placeholder contract `MyContract.sol` that you can modify, or simply create a new .sol file.
 
-- Solidity Documentation
-- Dapp tutorial
+- [Truffle Tutorials](https://truffleframework.com/tutorials)
+- [Solidity Documentation](http://solidity.readthedocs.io/en/v0.4.24/)
 
 Then, you'll want to write some simple tests to make sure your contract logic works as expected. Those go under the /tests folder. You can test them by running `truffle test`.
 
-- Truffle Docs: Testing
+- [Truffle Docs: Testing](https://truffleframework.com/docs/getting_started/testing)
 
 Once your contract is looking good, you'll want to get it built and deployed. You'll need to write migrations to deploy each of your contracts to the blockchain. See `migrations/2_deploy_contracts.js` for a very simple example. These migration files are run when you call `truffle migrate`.
 
-- Truffle Docs: Migrations
+- [Truffle Docs: Migrations](https://truffleframework.com/docs/getting_started/migrations)
 
 Now that your contract is deployed, you should have a json file representing the contract you wrote in /build/contracts. You can use that file to call methods on your contract. See `app/app.js` and `app/contract.js` for example usage.
 
-- Web3's Contract documentation
+- [Web3's Contract documentation](https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#methods-mymethod-call)
+
+---
 
 ## Deploying to a public server using Heroku
 
@@ -123,8 +154,8 @@ Important! Now that you have a dedicated URL for your app, update your redirect 
 
 Then, make sure your `bitski.config.js` production environment is configured correctly:
 
-- Add your new domain to environments.production.redirectURL
-- Make sure environments.production.network matches where your contract was deployed
+- Add your new domain to `environments.production.redirectURL`
+- Make sure `environments.production.network` matches where your contract was deployed
 
 Commit your changes:
 

@@ -2,7 +2,7 @@ const TruffleConfig = require('./truffle.js');
 
 module.exports = {
   app: {
-    id: '365c9c6a-5602-4bc6-942c-7084beada709' //change this to your app's client id
+    id: 'YOUR-CLIENT-ID' //change this to your app's client id
   },
   appWallet: {
     client: {
@@ -22,7 +22,7 @@ module.exports = {
     },
     production: {
       network: 'kovan', //ethereum network to use for production
-      redirectURL: 'https://gentle-oasis-36396.herokuapp.com/callback.html' //url the popup will redirect to when logged in
+      redirectURL: 'https://mydomain.com/callback.html' //url the popup will redirect to when logged in
     }
   },
   networkIds: {
