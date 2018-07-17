@@ -96,7 +96,6 @@ export default class App {
         this.showApp();
       }).catch(error => {
         this.setError(error);
-        this.showLoginButton();
       });
     } else {
       this.showLoginButton();
