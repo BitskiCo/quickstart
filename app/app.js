@@ -1,23 +1,38 @@
+// Simple example app that demonstrates sign in, sign out, using web3,
+// and initializing contracts from truffle.
+
 import { Bitski } from 'bitski';
-import MyContract from './contract';
+import Contract from './contract';
+
+// Import any contracts you want to use from the build folder.
+// Here we've imported the sample contract.
+import artifacts from '../build/contracts/MyContract.json';
 
 export default class App {
+  /**
+   * Creates the app.
+   */
   constructor() {
-    //Initialize bitski and web3
+    // Initialize bitski and web3
     this.bitski = new Bitski(BITSKI_CLIENT_ID, BITSKI_REDIRECT_URL);
     this.web3 = this.bitski.getWeb3(BITSKI_PROVIDER_ID);
-    this.contract = new MyContract(this.web3);
+    // Initialize the sample contract
+    this.contract = new Contract(this.web3, artifacts);
+    // Setup the interface
     this.configureView();
   }
 
+  /**
+   * One-time setup of the interface.
+   */
   configureView() {
-    //Store various UI elements
+    // Store various UI elements
     this.loadingContainer = document.getElementById('loading');
     this.signedInContainer = document.getElementById('signed-in');
     this.signedOutContainer = document.getElementById('signed-out');
     this.walletAddressContainer = document.getElementById('wallet-address');
     this.errorContainer = document.getElementById('error');
-    //Set up connect button
+    // Set up connect button
     const connectElement = document.getElementById('connect-button');
     this.connectButton = this.bitski.getConnectButton(connectElement);
     this.connectButton.callback = (error, user) => {
@@ -26,7 +41,7 @@ export default class App {
       }
       this.validateUser(user);
     }
-    //Set up log out button
+    // Set up log out button
     this.logOutButton = document.getElementById('log-out');
     this.logOutButton.addEventListener('click', (event) => {
       event.preventDefault();
@@ -34,6 +49,9 @@ export default class App {
     });
   }
 
+  /**
+   * Starts the application.
+   */
   start() {
     if (window.location.pathname === '/callback.html') {
       console.log(window.location);
@@ -43,20 +61,32 @@ export default class App {
     this.checkLoggedInStatus();
   }
 
+  /**
+   * Checks whether or not the user is current logged in to Bitski.
+   */
   checkLoggedInStatus() {
     this.bitski.getUser().then(user => {
-      this.hideLoading();
+      this.toggleLoading(false);
       this.validateUser(user);
     }).catch(error => {
+      this.toggleLoading(false);
       this.setError(error);
       showLoginButton();
     });
   }
 
-  hideLoading() {
-    this.loadingContainer.style.display = 'none';
+  /**
+   * Toggles the loading state
+   * @param {boolean} show whether or not to show the loading state
+   */
+  toggleLoading(show) {
+    this.loadingContainer.style.display = show === true ? 'block' : 'none';
   }
 
+  /**
+   * Checks whether or not the user we received is valid, and configures the UI.
+   * @param {Object} user the user returned from Bitski.getUser() or Bitski.signIn()
+   */
   validateUser(user) {
     if (user && !user.expired) {
       //Set up the contract
@@ -73,6 +103,10 @@ export default class App {
     }
   }
 
+  /**
+   * Configure the UI to show or hide an error
+   * @param {error | null} error error to show in the UI, or null to clear.
+   */
   setError(error) {
     if (error) {
       this.errorContainer.innerHTML = error;
@@ -82,6 +116,9 @@ export default class App {
     }
   }
 
+  /**
+   * Show the main app (logged in) UI
+   */
   showApp() {
     this.signedOutContainer.style.display = 'none';
     this.signedInContainer.style.display = 'block';
@@ -98,11 +135,17 @@ export default class App {
     });
   }
 
+  /**
+   * Show the logged out UI
+   */
   showLoginButton() {
     this.signedOutContainer.style.display = 'block';
     this.signedInContainer.style.display = 'none';
   }
 
+  /**
+   * Signs the current user out of Bitski and updates the UI.
+   */
   signOut() {
     this.bitski.userManager.removeUser();
     this.contractInstance = null;
