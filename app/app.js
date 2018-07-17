@@ -18,8 +18,20 @@ export default class App {
     this.web3 = this.bitski.getWeb3(BITSKI_PROVIDER_ID);
     // Initialize the sample contract
     this.contract = new Contract(this.web3, artifacts);
+  }
+
+  /**
+   * Starts the application.
+   */
+  start() {
+    // Check if this is the callback page - if so, notify Bitski SDK
+    if (window.location.pathname === '/callback.html') {
+      this.bitski.signInCallback();
+      return;
+    }
     // Setup the interface
     this.configureView();
+    this.checkLoggedInStatus();
   }
 
   /**
@@ -47,18 +59,6 @@ export default class App {
       event.preventDefault();
       this.signOut();
     });
-  }
-
-  /**
-   * Starts the application.
-   */
-  start() {
-    if (window.location.pathname === '/callback.html') {
-      console.log(window.location);
-      this.bitski.signInCallback();
-      return;
-    }
-    this.checkLoggedInStatus();
   }
 
   /**
