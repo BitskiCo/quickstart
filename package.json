@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "truffle migrate --network live",
     "test": "truffle test",
-    "dev": "webpack-dev-server --mode development --port 3000 --env.network development",
-    "postinstall": "./node_modules/webpack/bin/webpack.js --progress --env.network mainnet",
+    "dev": "webpack-dev-server --mode development --port 3000",
+    "postinstall": "./node_modules/webpack/bin/webpack.js --progress",
     "start": "node server.js"
   },
   "keywords": [],
