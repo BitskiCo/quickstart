@@ -1,0 +1,181 @@
+{
+  "contractName": "MyContract",
+  "abi": [
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a7230582088af1c6f5ba97d0d6f948c70bd0a6e0c5466a18b64951239ca129b79ff6769760029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a7230582088af1c6f5ba97d0d6f948c70bd0a6e0c5466a18b64951239ca129b79ff6769760029",
+  "sourceMap": "26:57:1:-;;;52:29;8:9:-1;5:2;;;30:1;27;20:12;5:2;52:29:1;26:57;;;;;;",
+  "deployedSourceMap": "26:57:1:-;;;;;",
+  "source": "pragma solidity ^0.4.23;\n\ncontract MyContract {\n    constructor() public {\n\n    }\n}\n",
+  "sourcePath": "/Users/jp/Work/bitski-quickstart/contracts/MyContract.sol",
+  "ast": {
+    "absolutePath": "/Users/jp/Work/bitski-quickstart/contracts/MyContract.sol",
+    "exportedSymbols": {
+      "MyContract": [
+        63
+      ]
+    },
+    "id": 64,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 58,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 63,
+        "linearizedBaseContracts": [
+          63
+        ],
+        "name": "MyContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 61,
+              "nodeType": "Block",
+              "src": "73:8:1",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 62,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 59,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "63:2:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 60,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "73:0:1"
+            },
+            "scope": 63,
+            "src": "52:29:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 64,
+        "src": "26:57:1"
+      }
+    ],
+    "src": "0:84:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/jp/Work/bitski-quickstart/contracts/MyContract.sol",
+    "exportedSymbols": {
+      "MyContract": [
+        63
+      ]
+    },
+    "id": 64,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 58,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 63,
+        "linearizedBaseContracts": [
+          63
+        ],
+        "name": "MyContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 61,
+              "nodeType": "Block",
+              "src": "73:8:1",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 62,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 59,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "63:2:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 60,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "73:0:1"
+            },
+            "scope": 63,
+            "src": "52:29:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 64,
+        "src": "26:57:1"
+      }
+    ],
+    "src": "0:84:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {
+    "4447": {
+      "events": {},
+      "links": {},
+      "address": "0x345ca3e014aaf5dca488057592ee47305d9b3e10",
+      "transactionHash": "0x49e9843ce67338a909da814a1818fe95c2e51bf64bf81ae8fc4085db18ebbd37"
+    }
+  },
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-17T01:17:48.239Z"
+}

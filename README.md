@@ -2,14 +2,16 @@
 
 ## Project structure
 
-- `/app` vanilla javascript front-end app
-- `/public` static files to be served
-- `/contracts` solidity source code
-- `/build` the compiled metadata for the solidity contracts
-- `/migrations` truffle migrations data
-
-- `truffle.js / truffle-config.js` configuration for truffle
-- `webpack.config.js` configuration for webpack
+`app/` | vanilla javascript front-end app that simply signs in and shows you the user's address. customize this with your own app.
+`build/` | the compiled json metadata for your contracts. import these files in your dapp to interact with your contracts.
+`contracts/` | solidity source code
+`migrations/` | truffle migrations data
+`public/` | static files to be served
+`test/` | truffle tests
+`package.json` | metadata about this project. customize with your details.
+`truffle.js` | configuration file for truffle. customize with your app wallet details.
+`truffle-config.js` | configuration file for truffle (Windows version). customize with your app wallet details if you use a Windows environment.
+`webpack.config.js` | configuration for webpack. customize with your Bitski client id.
 
 ## Setup
 
@@ -31,7 +33,7 @@ Then you'll also want to add a redirect URL for localhost, where we'll be runnin
 
 (Image of form)
 
-`http://localhost:3000/callback.html`
+http://localhost:3000/callback.html
 
 ## Developing locally
 
@@ -49,7 +51,7 @@ Then, in a new terminal window, run the development web server:
 npm run dev
 ```
 
-Visit localhost:3000 to run the app. Changes to the app will automatically trigger a reload of the page.
+Visit http://localhost:3000 to run the app. Changes to the app will automatically trigger a reload of the page.
 
 ## Deploying to Heroku
 

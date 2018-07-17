@@ -1,4 +1,5 @@
 import { Bitski } from 'bitski';
+import MyContract from './contract';
 
 export default class App {
   constructor() {
@@ -7,6 +8,11 @@ export default class App {
     const redirectURL = currentURL.origin + "/callback.html";
     this.bitski = new Bitski(BITSKI_CLIENT_ID, redirectURL);
     this.web3 = this.bitski.getWeb3(BITSKI_PROVIDER_ID);
+    this.contract = new MyContract(this.web3);
+    this.configureView();
+  }
+
+  configureView() {
     //Store various UI elements
     this.loadingContainer = document.getElementById('loading');
     this.signedInContainer = document.getElementById('signed-in');
@@ -55,7 +61,15 @@ export default class App {
 
   validateUser(user) {
     if (user && !user.expired) {
-      this.showApp();
+      //Set up the contract
+      this.contract.deployed().then(instance => {
+        this.contractInstance = instance;
+        // Show the app UI
+        this.showApp();
+      }).catch(error => {
+        this.setError(error);
+        this.showLoginButton();
+      });
     } else {
       this.showLoginButton();
     }
@@ -65,13 +79,15 @@ export default class App {
     if (error) {
       this.errorContainer.innerHTML = error;
       console.error(error);
+    } else {
+      this.errorContainer.innerHTML = '';
     }
   }
 
   showApp() {
     this.signedOutContainer.style.display = 'none';
     this.signedInContainer.style.display = 'block';
-
+    // From this point, you should be able to interact with web3 and contractInstance
     this.web3.eth.getAccounts().then(accounts => {
       this.currentAccount = accounts[0];
       if (accounts[0]) {
@@ -91,6 +107,7 @@ export default class App {
 
   signOut() {
     this.bitski.userManager.removeUser();
+    this.contractInstance = null;
     this.showLoginButton();
   }
 }
