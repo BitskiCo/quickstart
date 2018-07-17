@@ -4,9 +4,7 @@ import MyContract from './contract';
 export default class App {
   constructor() {
     //Initialize bitski and web3
-    const currentURL = new URL(window.location.href);
-    const redirectURL = currentURL.origin + "/callback.html";
-    this.bitski = new Bitski(BITSKI_CLIENT_ID, redirectURL);
+    this.bitski = new Bitski(BITSKI_CLIENT_ID, BITSKI_REDIRECT_URL);
     this.web3 = this.bitski.getWeb3(BITSKI_PROVIDER_ID);
     this.contract = new MyContract(this.web3);
     this.configureView();

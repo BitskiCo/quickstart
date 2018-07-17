@@ -5,13 +5,13 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = () => {
-  console.log(process.env.NODE_ENV);
   // Configuration options
   const environment = process.env.NODE_ENV || 'development';
   const currentNetwork = BitskiConfig.environments[environment].network;
   const bitskiClientId = BitskiConfig.app.id;
   const bitskiNetworkId = BitskiConfig.networkIds[currentNetwork];
-  const devtool = environment == 'development' ? 'eval' : false;
+  const bitskiRedirectURL = BitskiConfig.environments[environment].redirectURL;
+  const devtool = environment == 'development' ? 'source-map' : false;
 
   return {
     devtool: devtool,
@@ -53,6 +53,7 @@ module.exports = () => {
       new webpack.DefinePlugin({
         'BITSKI_PROVIDER_ID': JSON.stringify(bitskiNetworkId),
         'BITSKI_CLIENT_ID': JSON.stringify(bitskiClientId),
+        'BITSKI_REDIRECT_URL': JSON.stringify(bitskiRedirectURL)
       })
     ]
   }
