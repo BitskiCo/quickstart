@@ -6,14 +6,14 @@ This is a quick starting point for a web dapp built using Truffle and the Bitski
 
 Path | Description
 ----- | -------
-`app/` | example javascript front-end app that demonstrates Bitski sign in, web3 usage, and importing contracts.
-`build/` | the compiled json metadata for your contracts (generated from `truffle migrate`).
-`contracts/` | Solidity contracts for your dapp.
-`migrations/` | Truffle migrations for your dapp. See `2_deploy_contracts.js` for an example of deploying a contract.
-`public/` | static files to be served from your app's root.
-`test/` | truffle tests
-`package.json` | metadata about this project. customize with your details.
-`bitski.config.js` | configuration for bitski. update with your app's client id, and app wallet info.
+app/ | example javascript front-end app that demonstrates Bitski sign in, web3 usage, and importing contracts.
+build/ | the compiled json metadata for your contracts (generated from `truffle migrate`).
+contracts/ | Solidity contracts for your dapp.
+migrations/ | Truffle migrations for your dapp. See `2_deploy_contracts.js` for an example of deploying a contract.
+public/ | static files to be served from your app's root.
+test/ | truffle tests
+package.json | metadata about this project. customize with your details.
+bitski.config.js | bitski configuration. update with your app's client id, and app wallet info.
 
 ## Prerequisites
 
@@ -36,15 +36,15 @@ npm install
 
 You'll need a Bitski client id to run this app. Your client id provides some basic information to users about your application, and links various permissions granted by the user to your app.
 
-Visit Bitski's developer portal, create an account if you haven't already, and create a client id.
+Visit Bitski's [Developer Portal](https://developer.bitski.com), create an account if you haven't already, and create a client id.
 
 https://developer.bitski.com
 
-Then you'll also want to add a redirect URL for localhost, where we'll be running the app locally.
+![Create App](docs/create-app.png)
 
-(Image of form)
+Then you'll also want to add a redirect URL for localhost, where we'll be running the app locally: `http://localhost:3000/callback.html`
 
-http://localhost:3000/callback.html
+![Redirect URL](docs/redirect-url.png)
 
 Note: Your client id may need to be approved before you can use it, since Bitski is currently in beta.
 
@@ -118,6 +118,8 @@ heroku create
 ```
 
 Important! Now that you have a dedicated URL for your app, update your redirect url in the [developer portal](https://developer.bitski.com) to include your callback route on the new domain (https://my-app.herokuapp.com/callback.html).
+
+![Redirect URL](docs/live-redirect-url.png)
 
 Then, make sure your `bitski.config.js` production environment is configured correctly:
 
