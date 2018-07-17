@@ -30,7 +30,8 @@ export default class MyContract {
       if (address) {
         return this.at(address);
       } else {
-        return Promise.reject(`Contract not deployed on current network (${network}). Run truffle migrate first and try again.`);
+        const deployedNetworks = Object.keys(artifacts.networks);
+        return Promise.reject(`Contract not deployed on current network (${network}). Make sure you ran truffle migrate for the network this environment points to. Currently deployed on: ${deployedNetworks}.`);
       }
     });
   }
