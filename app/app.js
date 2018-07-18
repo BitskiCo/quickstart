@@ -25,7 +25,7 @@ export default class App {
    */
   start() {
     // Check if this is the callback page - if so, notify Bitski SDK
-    if (window.location.pathname === '/callback.html') {
+    if (window.location.href === BITSKI_REDIRECT_URL) {
       this.bitski.signInCallback();
       return;
     }
