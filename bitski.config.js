@@ -1,5 +1,3 @@
-const TruffleConfig = require('./truffle.js');
-
 module.exports = {
   app: {
     id: 'YOUR-CLIENT-ID' //change this to your app's client id
@@ -29,6 +27,6 @@ module.exports = {
     kovan: 'kovan',
     rinkeby: 'rinkeby',
     live: 'mainnet',
-    development: `http://${TruffleConfig.networks.development.host}:${TruffleConfig.networks.development.port}`
+    development: 'http://localhost:9545' //Update this if you use Ganache or another local blockchain
   }
 };
