@@ -16,7 +16,7 @@ The easiest way to get started is to use our truffle box:
 ```
 mkdir ProjectName
 cd ProjectName
-truffle unbox BitskiCo/bitski-quickstart
+truffle unbox BitskiCo/quickstart
 ```
 
 Alternatively, you can just clone this repo and run:
