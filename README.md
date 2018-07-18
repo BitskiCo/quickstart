@@ -2,19 +2,6 @@
 
 This is a quick starting point for a web dapp built using Truffle and the Bitski SDK. The front-end is powered by plain javascript using webpack, and can easily be swapped out. This project is also configured to be easily deployed to Heroku.
 
-## Project structure
-
-Path | Description
------ | -------
-app/ | example javascript front-end app that demonstrates Bitski sign in, web3 usage, and importing contracts.
-build/ | the compiled json metadata for your contracts (generated from `truffle migrate`).
-contracts/ | Solidity contracts for your dapp.
-migrations/ | Truffle migrations for your dapp. See `2_deploy_contracts.js` for an example of deploying a contract.
-public/ | static files to be served from your app's root.
-test/ | truffle tests
-package.json | metadata about this project. customize with your details.
-bitski.config.js | bitski configuration. update with your app's client id, and app wallet info.
-
 ## Prerequisites
 
 - NPM
@@ -38,6 +25,19 @@ Alternatively, you can just clone this repo and run:
 npm install
 ```
 
+## Project structure
+
+Path | Description
+----- | -------
+app/ | example javascript front-end app that demonstrates Bitski sign in, web3 usage, and importing contracts.
+build/ | the compiled json metadata for your contracts (generated from `truffle migrate`).
+contracts/ | Solidity contracts for your dapp.
+migrations/ | Truffle migrations for your dapp. See `2_deploy_contracts.js` for an example of deploying a contract.
+public/ | static files to be served from your app's root.
+test/ | truffle tests
+package.json | metadata about this project. customize with your details.
+bitski.config.js | bitski configuration. update with your app's client id, and app wallet info.
+
 ## Creating your Client ID
 
 You'll need a Bitski client id to run this app. Your client id provides some basic information to users about your application, and links various permissions granted by the user to your app.
@@ -50,7 +50,7 @@ Then you'll also want to add a redirect URL for localhost, where we'll be runnin
 
 ![Redirect URL](docs/redirect-url.png)
 
-Note: Your app may need to be approved before you can use it, since Bitski is currently in beta.
+**Note**: Your app may need to be approved before you can use it, since Bitski is currently in beta.
 
 ## Developing locally
 
@@ -130,17 +130,23 @@ This template is designed to be easy to deploy on Heroku for live demos. The ser
 
 #### Step 1: Deploy your contract with Truffle & Bitski App Wallet
 
-First, since this will be a publicly accessible app you'll want to deploy your contract on public blockchain as well. Decide if you're going to use a test network (kovan or rinkeby) where ETH can be acquired for free, or live network where you'll have to pay with real ETH.
+First, since this will be a publicly accessible app you'll need to deploy your contract to a public blockchain.
 
-In order to deploy using Bitski, you'll need to have set up an app wallet. If you haven't already set one up, visit the [Developer Portal](https://developer.bitski.com) and create one now.
+Decide if you're going to use a test network (kovan or rinkeby) where ETH can be acquired for free, or live network where you'll have to pay with real ETH.
+
+In order to deploy using Bitski, you'll need to have set up an app wallet. If you haven't already set one up, visit the [Developer Portal](https://developer.bitski.com) and create one now. Make sure you add some funds to your wallet to pay the transaction fees to deploy your contract.
 
 Then, paste your app wallet id and secret in `bitski.config.js` under `appWallet`.
 
 Finally, run the migrate command with the desired network value (live, kovan, or rinkeby):
 
+**Note:** Currently only `rinkeby` and `live` are supported by Bitski's App Wallet.
+
 ```
 truffle migrate --network live
 ```
+
+If you don't want to use Bitski to deploy, you can also use a more complicated setup with an HDWallet and Infura. [Learn more here](https://truffleframework.com/tutorials/using-infura-custom-provider).
 
 #### Step 2: Deploy your front-end app on Heroku
 

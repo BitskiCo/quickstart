@@ -10,15 +10,21 @@ module.exports = {
     },
     live: {
       network_id: '1',
-      provider: BitskiTruffleProvider("mainnet", BitskiConfig.appWallet),
+      provider: () => {
+        return BitskiTruffleProvider("mainnet", BitskiConfig.appWallet)
+      }
     },
     kovan: {
       network_id: '42',
-      provider: BitskiTruffleProvider("kovan", BitskiConfig.appWallet),
+      provider: () => {
+        return BitskiTruffleProvider("kovan", BitskiConfig.appWallet)
+      }
     },
     rinkeby: {
       network_id: '4',
-      provider: BitskiTruffleProvider("rinkeby", BitskiConfig.appWallet),
+      provider: () => {
+        return BitskiTruffleProvider("rinkeby", BitskiConfig.appWallet)
+      }
     },
   }
 };
