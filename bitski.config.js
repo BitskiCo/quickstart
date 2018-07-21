@@ -5,7 +5,7 @@ module.exports = {
   appWallet: {
     client: {
       //if you have an app wallet, add your client id and secret here
-      id: 'YOUR-APP-WALLET-ID',
+      id: 'YOUR-APP-WALLET-ClIENT-ID',
       secret: 'YOUR-APP-WALLET-SECRET'
     },
     auth: {

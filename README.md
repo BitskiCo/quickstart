@@ -50,8 +50,6 @@ Then you'll also want to add a redirect URL for localhost, where we'll be runnin
 
 ![Redirect URL](docs/redirect-url.png)
 
-**Note**: Your app may need to be approved before you can use it, since Bitski is currently in beta.
-
 ## Developing locally
 
 This example uses webpack to combine some simple static files and plain javascript. Locally we'll use webpack-dev-server to serve the app.
@@ -132,15 +130,19 @@ This template is designed to be easy to deploy on Heroku for live demos. The ser
 
 First, since this will be a publicly accessible app you'll need to deploy your contract to a public blockchain.
 
-Decide if you're going to use a test network (kovan or rinkeby) where ETH can be acquired for free, or live network where you'll have to pay with real ETH.
+In order to deploy your contract using Bitski, you'll need to have set up an app wallet. If you haven't already set one up, visit the [Developer Portal](https://developer.bitski.com) and create one by creating a new app. Make sure to select **Backend / App Wallet** as the app type, then paste your _client id_ and _client secret_ under _appWallet_ in `bitski.config.js`.
 
-In order to deploy using Bitski, you'll need to have set up an app wallet. If you haven't already set one up, visit the [Developer Portal](https://developer.bitski.com) and create one now. Make sure you add some funds to your wallet to pay the transaction fees to deploy your contract.
+To get your app wallet's address, run `npm run get-address`.
 
-Then, paste your app wallet id and secret in `bitski.config.js` under `appWallet`.
-
-Finally, run the migrate command with the desired network value (live, kovan, or rinkeby):
+Next, decide if you're going to use a test network (kovan or rinkeby) where ETH can be acquired for free, or live network where you'll have to pay with real ETH.
 
 **Note:** Currently only `rinkeby` and `live` are supported by Bitski's App Wallet.
+
+Make sure you add some ETH to your wallet to pay the transaction fees to deploy your contract. How much you need depends on how complex your contract is, but a good place to start is 0.1 or 0.2 ETH.
+
+If you're deploying on a test net, you can get ETH from a <a href="https://faucet.rinkeby.io" target="_blank">faucet</a>, otherwise buy some ETH from <a href="https://coinbase.com" target="_blank">Coinbase</a>.
+
+Finally, run the migrate command with the desired network value (live, kovan, or rinkeby):
 
 ```
 truffle migrate --network live
