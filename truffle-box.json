@@ -1,12 +1,13 @@
 {
   "ignore": [],
   "commands": {
+    "Configure Bitski (do this first)": "npm run setup",
+    "Run dev server": "npm run dev",
     "Compile": "truffle compile",
     "Migrate": "truffle migrate",
-    "Test contracts": "truffle test",
-    "Run dev server": "npm run dev"
+    "Test contracts": "truffle test"
   },
   "hooks": {
-    "post-unpack": "git init; npm install; truffle compile; npm run setup"
+    "post-unpack": "git init; npm install; truffle compile"
   }
 }
