@@ -7,7 +7,8 @@
     "dev": "webpack-dev-server --mode development --port 3000",
     "get-address": "node get-address.js",
     "heroku-postbuild": "./node_modules/webpack/bin/webpack.js --progress",
-    "start": "node server.js"
+    "start": "node server.js",
+    "setup": "node setup.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "copy-webpack-plugin": "^4.5.1",
     "html-webpack-plugin": "^3.2.0",
     "npm": "^6.0.0",
+    "prompt": "^1.0.0",
     "truffle": "^4.1.7",
     "webpack": "^4.16.0",
     "webpack-cli": "^3.0.8",

@@ -7,6 +7,6 @@
     "Run dev server": "npm run dev"
   },
   "hooks": {
-    "post-unpack": "git init; npm install; truffle compile"
+    "post-unpack": "git init; npm install; truffle compile; npm run setup"
   }
 }
