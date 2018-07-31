@@ -146,8 +146,11 @@ export default class App {
    * Signs the current user out of Bitski and updates the UI.
    */
   signOut() {
-    this.bitski.userManager.removeUser();
-    this.contractInstance = null;
-    this.showLoginButton();
+    this.bitski.signOut().then(() => {
+      this.contractInstance = null;
+      this.showLoginButton();
+    }).catch(err => {
+      this.setError(err);
+    });
   }
 }
