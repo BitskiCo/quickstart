@@ -75,7 +75,11 @@ Then, start Truffle's development blockchain:
 truffle develop
 ```
 
-If it's your first run, you'll also need to run the migrations.
+If it's your first run, you'll also need to run the migrations. If you haven't already, make sure you have bitski-truffle-provider installed:
+
+```
+npm install --save-dev bitski-truffle-provider
+```
 
 From the truffle console you can just type `migrate`:
 ```
