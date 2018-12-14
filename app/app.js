@@ -1,7 +1,8 @@
 // Simple example app that demonstrates sign in, sign out, using web3,
 // and initializing contracts from truffle.
 
-import { Bitski } from 'bitski';
+import { Bitski, AuthenticationStatus } from 'bitski';
+import Web3 from 'web3';
 import Contract from './contract';
 
 // Import any contracts you want to use from the build folder.
@@ -15,7 +16,7 @@ export default class App {
   constructor() {
     // Initialize bitski and web3
     this.bitski = new Bitski(BITSKI_CLIENT_ID, BITSKI_REDIRECT_URL);
-    this.web3 = this.bitski.getWeb3(BITSKI_PROVIDER_ID);
+    this.web3 = new Web3(bitski.getProvider(BITSKI_PROVIDER_ID));
     // Initialize the sample contract
     this.contract = new Contract(this.web3, artifacts);
   }
@@ -24,11 +25,6 @@ export default class App {
    * Starts the application.
    */
   start() {
-    // Check if this is the callback page - if so, notify Bitski SDK
-    if (window.location.href === BITSKI_REDIRECT_URL) {
-      this.bitski.signInCallback();
-      return;
-    }
     // Setup the interface
     this.configureView();
     this.checkLoggedInStatus();
@@ -44,15 +40,17 @@ export default class App {
     this.signedOutContainer = document.getElementById('signed-out');
     this.walletAddressContainer = document.getElementById('wallet-address');
     this.errorContainer = document.getElementById('error');
+
     // Set up connect button
     const connectElement = document.getElementById('connect-button');
-    this.connectButton = this.bitski.getConnectButton(connectElement);
-    this.connectButton.callback = (error, user) => {
+    this.connectButton = this.bitski.getConnectButton({ container: connectElement }, (error) => {
       if (error) {
         this.setError(error);
+      } else {
+        this.continueToApp();
       }
-      this.validateUser(user);
-    }
+    });
+
     // Set up log out button
     this.logOutButton = document.getElementById('log-out');
     this.logOutButton.addEventListener('click', (event) => {
@@ -62,16 +60,20 @@ export default class App {
   }
 
   /**
-   * Checks whether or not the user is current logged in to Bitski.
+   * Checks whether or not the user is currently logged in to Bitski.
    */
   checkLoggedInStatus() {
-    this.bitski.getUser().then(user => {
+    this.bitski.getAuthStatus().then(authStatus => {
       this.toggleLoading(false);
-      this.validateUser(user);
+      if (authStatus == AuthenticationStatus.Connected) {
+        this.continueToApp();
+      } else {
+        this.showLoginButton();
+      }
     }).catch(error => {
       this.toggleLoading(false);
       this.setError(error);
-      showLoginButton();
+      this.showLoginButton();
     });
   }
 
@@ -84,22 +86,17 @@ export default class App {
   }
 
   /**
-   * Checks whether or not the user we received is valid, and configures the UI.
-   * @param {Object} user the user returned from Bitski.getUser() or Bitski.signIn()
+   * Initializes the contract and shows the app UI
    */
-  validateUser(user) {
-    if (user && !user.expired) {
-      //Set up the contract
-      this.contract.deployed().then(instance => {
-        this.contractInstance = instance;
-        // Show the app UI
-        this.showApp();
-      }).catch(error => {
-        this.setError(error);
-      });
-    } else {
-      this.showLoginButton();
-    }
+  continueToApp() {
+    //Set up the contract
+    this.contract.deployed().then(instance => {
+      this.contractInstance = instance;
+      // Show the app UI
+      this.showApp();
+    }).catch(error => {
+      this.setError(error);
+    });
   }
 
   /**

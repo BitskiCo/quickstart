@@ -38,12 +38,6 @@ module.exports = () => {
         template: './app/index.html',
         hash: true
       }),
-      new HTMLWebpackPlugin({
-        title: 'My App',
-        filename: 'callback.html',
-        template: './app/callback.html',
-        hash: true
-      }),
       new CopyWebpackPlugin([
         {
         from: 'public',
