@@ -16,7 +16,7 @@ export default class App {
   constructor() {
     // Initialize bitski and web3
     this.bitski = new Bitski(BITSKI_CLIENT_ID, BITSKI_REDIRECT_URL);
-    this.web3 = new Web3(bitski.getProvider(BITSKI_PROVIDER_ID));
+    this.web3 = new Web3(this.bitski.getProvider(BITSKI_PROVIDER_ID));
     // Initialize the sample contract
     this.contract = new Contract(this.web3, artifacts);
   }

@@ -46,7 +46,7 @@ Visit Bitski's [Developer Portal](https://developer.bitski.com), create an accou
 
 ![Create App](docs/create-app.png)
 
-Then you'll also want to add a redirect URL for localhost, where we'll be running the app locally: `http://localhost:3000/callback.html`
+Then you'll also want to add a redirect URL for localhost, where we'll be running the app locally: `http://localhost:3000/public/callback.html`
 
 ![Redirect URL](docs/redirect-url.png)
 
