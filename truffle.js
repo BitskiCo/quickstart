@@ -5,6 +5,11 @@ const { credential, secret } = BitskiConfig.appWallet;
 const providerManager = new ProviderManager(credential, secret);
 
 module.exports = {
+  compilers: {
+    solc: {
+      version: "^0.4.24"
+    }
+  },
   networks: {
     development: {
       host: 'localhost',

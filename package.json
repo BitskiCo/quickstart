@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "test": "truffle test",
+    "build": "truffle compile && NODE_ENV=production webpack",
     "dev": "webpack-dev-server --mode development --port 3000",
     "get-address": "node get-address.js",
     "heroku-postbuild": "./node_modules/webpack/bin/webpack.js --progress",
