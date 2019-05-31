@@ -12,14 +12,14 @@ console.log('Now we\'re going to ask you about your Bitski app. If you haven\'t 
 const schema = {
   properties: {
     hasClientId: {
-      message: '\nDo you have a Bitski Client Id? (y/n)',
+      message: '\nDo you have a Bitski app id? (y/n)',
       validator: /^[y|n]?$/,
       warning: 'Must respond y or n',
       default: 'n',
       type: 'string'
     },
     clientId: {
-      description: '\nEnter your Bitski Client Id',
+      description: '\nEnter your Bitski app id',
       type: 'string',
       ask: function() {
         return prompt.history('hasClientId').value == 'y';
@@ -33,14 +33,14 @@ const schema = {
       type: 'string'
     },
     appWalletId: {
-      description: '\nEnter your App Wallet ID',
+      description: '\nEnter your credential id (Credentials tab in dev portal)',
       type: 'string',
       ask: function() {
         return prompt.history('hasAppWallet').value == 'y';
       }
     },
     appWalletSecret: {
-      description: '\nEnter your App Wallet secret',
+      description: '\nEnter your credential secret',
       type: 'string',
       ask: function() {
         return prompt.history('hasAppWallet').value == 'y';
@@ -75,4 +75,4 @@ prompt.get(schema, (err, result) => {
       });
     }
   });
-})
+});

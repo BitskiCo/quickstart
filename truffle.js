@@ -1,30 +1,33 @@
 const BitskiConfig = require('./bitski.config.js');
-const BitskiTruffleProvider = require('bitski-truffle-provider');
+const { ProviderManager } = require('bitski-node');
+
+const { credential, secret } = BitskiConfig.appWallet;
+const providerManager = new ProviderManager(credential, secret);
 
 module.exports = {
   networks: {
     development: {
-      host: "localhost",
+      host: 'localhost',
       port: 9545,
-      network_id: "*",
+      network_id: '*',
     },
     live: {
       network_id: '1',
       provider: () => {
-        return BitskiTruffleProvider("mainnet", BitskiConfig.appWallet)
+        return providerManager.getProvider('mainnet');
       }
     },
     kovan: {
       network_id: '42',
       provider: () => {
-        return BitskiTruffleProvider("kovan", BitskiConfig.appWallet)
+        return providerManager.getProvider('kovan');
       }
     },
     rinkeby: {
       network_id: '4',
       provider: () => {
-        return BitskiTruffleProvider("rinkeby", BitskiConfig.appWallet)
+        return providerManager.getProvider('rinkeby');
       }
-    }
+    },
   }
 };

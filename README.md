@@ -75,12 +75,6 @@ Then, start Truffle's development blockchain:
 truffle develop
 ```
 
-If it's your first run, you'll also need to run the migrations. If you haven't already, make sure you have bitski-truffle-provider installed:
-
-```
-npm install --save-dev bitski-truffle-provider
-```
-
 From the truffle console you can just type `migrate`:
 ```
 truffle> migrate
@@ -110,7 +104,8 @@ Getting the example code working is just the beginning. Now it's up to your imag
 Start by designing your contract using Solidity. You'll put any contracts you write or reference in the /contracts folder. We've created a placeholder contract `MyContract.sol` that you can modify, or simply create a new .sol file.
 
 - [Truffle Tutorials](https://truffleframework.com/tutorials)
-- [Solidity Documentation](http://solidity.readthedocs.io/en/v0.4.24/)
+- [OpenZeppelin Templates](https://openzeppelin.org)
+- [Solidity Documentation](https://solidity.readthedocs.io/en/v0.4.24/)
 
 Then, you'll want to write some simple tests to make sure your contract logic works as expected. Those go under the /tests folder. You can test them by running `truffle test`.
 
@@ -134,25 +129,22 @@ This template is designed to be easy to deploy on Heroku for live demos. The ser
 
 First, since this will be a publicly accessible app you'll need to deploy your contract to a public blockchain.
 
-In order to deploy your contract using Bitski, you'll need to have set up an app wallet. If you haven't already set one up, visit the [Developer Portal](https://developer.bitski.com) and create one by creating a new app. Make sure to select **Backend / App Wallet** as the app type, then paste your _client id_ and _client secret_ under _appWallet_ in `bitski.config.js`.
+In order to deploy your contract using Bitski, you'll need to have set up an app wallet. If you haven't already set one up, visit the [Developer Portal](https://developer.bitski.com), navigate to your app, visit the Credentials tab, and select 'New Credential'.
+Paste your _credential id_ and _secret_ under _appWallet_ in `bitski.config.js`. Then, navigate to the App Wallet tab, and select 'New Account'. This will create a new ethereum account dedicated for your app.
 
 To get your app wallet's address, run `npm run get-address`.
 
 Next, decide if you're going to use a test network (kovan or rinkeby) where ETH can be acquired for free, or live network where you'll have to pay with real ETH.
 
-**Note:** Currently only `rinkeby` and `live` are supported by Bitski's App Wallet.
-
 Make sure you add some ETH to your wallet to pay the transaction fees to deploy your contract. How much you need depends on how complex your contract is, but a good place to start is 0.1 or 0.2 ETH.
 
-If you're deploying on a test net, you can get ETH from a <a href="https://faucet.rinkeby.io" target="_blank">faucet</a>, otherwise buy some ETH from <a href="https://coinbase.com" target="_blank">Coinbase</a>.
+If you're deploying on a test net, you can get ETH from a <a href="https://faucet.rinkeby.io" target="_blank">faucet</a>, otherwise buy some ETH from <a href="https://coinbase.com" target="_blank">Coinbase</a> and send it to your App Wallet's address.
 
 Finally, run the migrate command with the desired network value (live, kovan, or rinkeby):
 
 ```
 truffle migrate --network live
 ```
-
-If you don't want to use Bitski to deploy, you can also use a more complicated setup with an HDWallet and Infura. [Learn more here](https://truffleframework.com/tutorials/using-infura-custom-provider).
 
 #### Step 2: Deploy your front-end app on Heroku
 

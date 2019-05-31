@@ -14,9 +14,15 @@ export default class App {
    * Creates the app.
    */
   constructor() {
-    // Initialize bitski and web3
+    // Initialize bitski sdk
     this.bitski = new Bitski(BITSKI_CLIENT_ID, BITSKI_REDIRECT_URL);
-    this.web3 = new Web3(this.bitski.getProvider(BITSKI_PROVIDER_ID));
+    // Generate a network config for the current environment
+    const network = {
+      rpcUrl: PROVIDER_RPC_URL,
+      chainId: PROVIDER_CHAIN_ID
+    };
+    // Initialize web3
+    this.web3 = new Web3(this.bitski.getProvider({ network }));
     // Initialize the sample contract
     this.contract = new Contract(this.web3, artifacts);
   }
@@ -63,18 +69,11 @@ export default class App {
    * Checks whether or not the user is currently logged in to Bitski.
    */
   checkLoggedInStatus() {
-    this.bitski.getAuthStatus().then(authStatus => {
-      this.toggleLoading(false);
-      if (authStatus == AuthenticationStatus.Connected) {
-        this.continueToApp();
-      } else {
-        this.showLoginButton();
-      }
-    }).catch(error => {
-      this.toggleLoading(false);
-      this.setError(error);
+    if (this.bitski.authStatus !== AuthenticationStatus.NotConnected) {
+      this.continueToApp();
+    } else {
       this.showLoginButton();
-    });
+    }
   }
 
   /**
@@ -124,7 +123,7 @@ export default class App {
       if (accounts[0]) {
         this.walletAddressContainer.innerHTML = accounts[0];
       } else {
-        console.log('no address found')
+        console.log('no address found');
       }
     }).catch(error => {
       this.setError(error);

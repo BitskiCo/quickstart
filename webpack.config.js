@@ -7,10 +7,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = () => {
   // Configuration options
   const environment = process.env.NODE_ENV || 'development';
-  const currentNetwork = BitskiConfig.environments[environment].network;
   const bitskiClientId = BitskiConfig.app.id;
-  const bitskiNetworkId = BitskiConfig.networkIds[currentNetwork];
   const bitskiRedirectURL = BitskiConfig.environments[environment].redirectURL;
+  const network = BitskiConfig.environments[environment].network;
+  const providerRPCUrl = network.rpcUrl;
+  const providerChainId = network.chainId;
+
+  // Generate a source-map only for development builds
   const devtool = environment == 'development' ? 'source-map' : false;
 
   return {
@@ -45,10 +48,11 @@ module.exports = () => {
         }
       ]),
       new webpack.DefinePlugin({
-        'BITSKI_PROVIDER_ID': JSON.stringify(bitskiNetworkId),
+        'PROVIDER_RPC_URL': JSON.stringify(providerRPCUrl),
+        'PROVIDER_CHAIN_ID': JSON.stringify(providerChainId),
         'BITSKI_CLIENT_ID': JSON.stringify(bitskiClientId),
         'BITSKI_REDIRECT_URL': JSON.stringify(bitskiRedirectURL)
       })
     ]
-  }
+  };
 };

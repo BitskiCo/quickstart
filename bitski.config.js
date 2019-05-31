@@ -1,32 +1,26 @@
+const { Mainnet, Rinkeby, Kovan } = require('bitski');
+
 module.exports = {
   app: {
     id: 'YOUR-CLIENT-ID' //change this to your app's client id
   },
   appWallet: {
-    client: {
-      //if you have an app wallet, add your client id and secret here
-      id: 'YOUR-APP-WALLET-CLIENT-ID',
-      secret: 'YOUR-APP-WALLET-SECRET'
-    },
-    auth: {
-      tokenHost: 'https://account.bitski.com',
-      tokenPath: '/oauth2/token'
-    }
+    credential: 'YOUR-APP-WALLET-CLIENT-ID',
+    secret: 'YOUR-APP-WALLET-SECRET'
   },
   environments: {
     development: {
-      network: 'development', //ethereum network to use for local dev
+       //ethereum network to use for local dev (Replace with Mainnet, Rinkeby, or Kovan to use a real network)
+      network: {
+        rpcUrl: 'http://localhost:9545',
+        chainId: 5777,
+      },
       redirectURL: 'http://localhost:3000/public/callback.html' //url the popup will redirect to when logged in
     },
     production: {
-      network: 'kovan', //ethereum network to use for production
+      //ethereum network to use for production builds
+      network: Rinkeby,
       redirectURL: 'https://mydomain.com/public/callback.html' //url the popup will redirect to when logged in
     }
-  },
-  networkIds: {
-    kovan: 'kovan',
-    rinkeby: 'rinkeby',
-    live: 'mainnet',
-    development: 'http://localhost:9545' //Update this if you use Ganache or another local blockchain
   }
 };
